@@ -114,7 +114,7 @@ func TestErrorMessage(t *testing.T) {
 func BenchmarkRequireEqualInt64(b *testing.B) {
 	t := &mockT{}
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := range b.N {
 		RequireEqual(t, int64(1), int64(1))
 	}
 }
@@ -122,7 +122,7 @@ func BenchmarkRequireEqualInt64(b *testing.B) {
 func BenchmarkTestifyRequireEqualInt64(b *testing.B) {
 	t := &mockT{}
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := range b.N {
 		require.Equal(t, int64(1), int64(1))
 	}
 }
@@ -133,7 +133,7 @@ func BenchmarkRequireEqualString(b *testing.B) {
 
 	mockT := &mockT{}
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := range b.N {
 		RequireEqual(mockT, s1, s2)
 	}
 }
@@ -144,7 +144,7 @@ func BenchmarkTestifyRequireEqualString(b *testing.B) {
 
 	mockT := &mockT{}
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := range b.N {
 		require.Equal(mockT, s1, s2)
 	}
 }
@@ -155,7 +155,7 @@ func BenchmarkRequireEqualMap(b *testing.B) {
 
 	mockT := &mockT{}
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := range b.N {
 		RequireEqual(mockT, m1, m2)
 	}
 }
@@ -166,7 +166,7 @@ func BenchmarkTestifyRequireEqualMap(b *testing.B) {
 
 	mockT := &mockT{}
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := range b.N {
 		require.Equal(mockT, m1, m2)
 	}
 }

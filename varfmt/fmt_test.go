@@ -100,7 +100,7 @@ func BenchmarkFormat(b *testing.B) {
 	} {
 		b.Run(tc.name, func(b *testing.B) {
 			b.ReportAllocs()
-			for i := 0; i < b.N; i++ {
+			for i := range b.N {
 				_ = Sprintf(tc.format, tc.args...)
 			}
 		})
@@ -130,8 +130,7 @@ func BenchmarkSprintf(b *testing.B) {
 	} {
 		b.Run(tc.name, func(b *testing.B) {
 			b.ReportAllocs()
-
-			for i := 0; i < b.N; i++ {
+			for i := range b.N {
 				_ = fmt.Sprintf(tc.format, tc.args...)
 			}
 		})

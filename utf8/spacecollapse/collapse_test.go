@@ -34,8 +34,7 @@ func BenchmarkCollapse(b *testing.B) {
 	input := strings.Repeat("🙂  🙂", 100)
 
 	b.ReportAllocs()
-
-	for i := 0; i < b.N; i++ {
+	for i := range b.N {
 		_ = CollapseSpaces(input)
 	}
 }

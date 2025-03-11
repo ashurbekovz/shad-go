@@ -79,8 +79,7 @@ func TestSemaphore_IndependentKeys(t *testing.T) {
 	defer func() { _ = rdb.Close() }()
 
 	ctx := context.Background()
-
-	for i := 0; i < 1000; i++ {
+	for i := range 1000 {
 		sem := NewSemaphore(rdb)
 
 		release, err := sem.Acquire(ctx, fmt.Sprint(i), 1)
@@ -111,7 +110,7 @@ func TestSemaphore_LimitN(t *testing.T) {
 	var wg sync.WaitGroup
 
 	wg.Add(G)
-	for g := 0; g < G; g++ {
+	for g := range G {
 		go func() {
 			defer wg.Done()
 

@@ -50,7 +50,7 @@ func TestPubSub_nonBlockPublish(t *testing.T) {
 
 	done := make(chan struct{})
 	go func() {
-		for i := 0; i < 11; i++ {
+		for i := range 11 {
 			err = p.Publish("non-bock-topic", "pew-pew")
 			assert.NoError(t, err)
 		}
@@ -156,8 +156,7 @@ func TestPubSub_slowpoke(t *testing.T) {
 		fastWg.Done()
 	})
 	require.NoError(t, err)
-
-	for i := 0; i < samples; i++ {
+	for i := range samples {
 		err = p.Publish("slowpoke", "pew-pew")
 		require.NoError(t, err)
 	}
@@ -214,8 +213,7 @@ func TestPubSub_sequencePublishers(t *testing.T) {
 		wg.Done()
 	})
 	require.NoError(t, err)
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		err := p.Publish("topic", "pew-pew")
 		require.NoError(t, err)
 	}
@@ -235,8 +233,7 @@ func TestPubSub_concurrentPublishers(t *testing.T) {
 		wg.Done()
 	})
 	require.NoError(t, err)
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		go func() {
 			err := p.Publish("topic", "pew-pew")
 			require.NoError(t, err)
@@ -311,8 +308,7 @@ func TestPubSub_close(t *testing.T) {
 		}
 	})
 	require.NoError(t, err)
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		err = p.Publish("unsubscribe", "pew-pew")
 		require.NoError(t, err)
 	}
@@ -352,7 +348,7 @@ func TestPubSub_closeWaitsMessageDelivery(t *testing.T) {
 	require.NoError(t, err)
 
 	const N = 11
-	for i := 0; i < N; i++ {
+	for i := range N {
 		err = p.Publish("q", "pew-pew")
 		require.NoError(t, err)
 	}

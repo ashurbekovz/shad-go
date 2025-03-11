@@ -55,14 +55,14 @@ func TestStaleRead(t *testing.T) {
 	value.Store(counter)
 
 	var wg sync.WaitGroup
-	for i := 0; i < N; i++ {
+	for i := range N {
 		wg.Add(1)
 
 		go func(i int) {
 			defer wg.Done()
 
 			time.Sleep(time.Duration(i) * time.Millisecond / time.Duration(N))
-			for j := 0; j < K; j++ {
+			for j := range K {
 				counterValue := atomic.LoadInt32(&counter)
 				batcherValue := b.Load().(int32)
 
@@ -73,8 +73,7 @@ func TestStaleRead(t *testing.T) {
 			}
 		}(i)
 	}
-
-	for i := 0; i < M*K; i++ {
+	for i := range M * K {
 		// value is always greater than counter
 		value.Store(int32(i))
 		atomic.StoreInt32(&counter, int32(i))
@@ -105,13 +104,12 @@ func TestSpeed(t *testing.T) {
 	start := time.Now()
 
 	var wg sync.WaitGroup
-	for i := 0; i < N; i++ {
+	for i := range N {
 		wg.Add(1)
 
 		go func() {
 			defer wg.Done()
-
-			for i := 0; i < K; i++ {
+			for i := range K {
 				b.Load()
 			}
 		}()

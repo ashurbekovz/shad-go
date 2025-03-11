@@ -146,7 +146,7 @@ func TestMergeChans(t *testing.T) {
 	receivedNumbers := make([]bool, numIter)
 
 	go func() {
-		for i := 0; i < numIter; i++ {
+		for i := range numIter {
 			chans[i%numChans] <- i
 		}
 		for _, ch := range chans {

@@ -18,9 +18,10 @@ func Example(ctx context.Context) {
 	// Описание батча
 	stmt, _ := tx.PrepareContext(ctx, "INSERT INTO example (id) VALUES (?)")
 	defer stmt.Close()
+	for
 
 	// Добавление данных
-	for i := 0; i < 100; i++ {
+	i := range 100 {
 		_, _ = stmt.ExecContext(ctx, i)
 	}
 

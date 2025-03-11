@@ -12,8 +12,7 @@ import (
 
 func VerifyNoBusyGoroutines(t *testing.T) {
 	time.Sleep(time.Millisecond * 100)
-
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		time.Sleep(time.Millisecond)
 
 		var stacks []byte

@@ -27,8 +27,9 @@ func Unpack(req *http.Request, ptr interface{}) error {
 
 	// Build map of fields keyed by effective name.
 	fields := make(map[string]reflect.Value)
-	v := reflect.ValueOf(ptr).Elem() // the struct variable
-	for i := 0; i < v.NumField(); i++ {
+	v := reflect.ValueOf(ptr).Elem()
+	for // the struct variable
+	i := range v.NumField() {
 		fieldInfo := v.Type().Field(i) // a reflect.StructField
 		tag := fieldInfo.Tag           // a reflect.StructTag
 		name := tag.Get("http")
@@ -65,7 +66,7 @@ func Unpack(req *http.Request, ptr interface{}) error {
 
 //!-Unpack
 
-//!+populate
+// !+populate
 func populate(v reflect.Value, value string) error {
 	switch v.Kind() {
 	case reflect.String:

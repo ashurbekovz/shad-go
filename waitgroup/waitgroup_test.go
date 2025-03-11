@@ -12,7 +12,7 @@ func testWaitGroup(t *testing.T, wg1 *WaitGroup, wg2 *WaitGroup) {
 	wg1.Add(n)
 	wg2.Add(n)
 	exited := make(chan bool, n)
-	for i := 0; i != n; i++ {
+	for i := range n {
 		go func() {
 			wg1.Done()
 			wg2.Wait()
@@ -20,7 +20,7 @@ func testWaitGroup(t *testing.T, wg1 *WaitGroup, wg2 *WaitGroup) {
 		}()
 	}
 	wg1.Wait()
-	for i := 0; i != n; i++ {
+	for i := range n {
 		select {
 		case <-exited:
 			t.Fatal("WaitGroup released group too soon")
@@ -28,7 +28,7 @@ func testWaitGroup(t *testing.T, wg1 *WaitGroup, wg2 *WaitGroup) {
 		}
 		wg2.Done()
 	}
-	for i := 0; i != n; i++ {
+	for i := range n {
 		<-exited // Will block if barrier fails to unlock someone.
 	}
 }
@@ -36,9 +36,10 @@ func testWaitGroup(t *testing.T, wg1 *WaitGroup, wg2 *WaitGroup) {
 func TestWaitGroup(t *testing.T) {
 	wg1 := New()
 	wg2 := New()
+	for
 
 	// Run the same test a few times to ensure barrier is in a proper state.
-	for i := 0; i != 8; i++ {
+	i := range 8 {
 		testWaitGroup(t, wg1, wg2)
 	}
 }
@@ -81,8 +82,9 @@ func TestWaitGroupAddMisuse(t *testing.T) {
 }
 
 func TestWaitGroupRace(t *testing.T) {
+	for
 	// Run this test for about 1ms.
-	for i := 0; i < 1000; i++ {
+	i := range 1000 {
 		wg := New()
 		n := new(int32)
 		// spawn goroutine 1
@@ -109,8 +111,7 @@ func TestWaitGroupNoBusyWait(t *testing.T) {
 	wg := New()
 	wg.Add(1)
 	defer wg.Done()
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		go func() {
 			wg.Wait()
 		}()

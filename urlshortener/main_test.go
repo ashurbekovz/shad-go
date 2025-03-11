@@ -100,7 +100,7 @@ func TestURLShortener_redirect(t *testing.T) {
 	addURL := fmt.Sprintf("http://localhost:%s/shorten", port)
 
 	requests := make(map[string]struct{})
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		path := "/" + testtool.RandomName()
 		req := redirectTarget.URL + path
 		requests[path] = struct{}{}
@@ -169,7 +169,7 @@ func TestURLShortener_consistency(t *testing.T) {
 	}
 
 	var urls []string
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		urls = append(urls, testtool.RandomName())
 	}
 

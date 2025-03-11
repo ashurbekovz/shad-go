@@ -13,7 +13,9 @@ func New() *Once {
 
 // Do calls the function f if and only if Do is being called for the
 // first time for this instance of Once. In other words, given
-// 	once := New()
+//
+//	once := New()
+//
 // if once.Do(f) is called multiple times, only the first call will invoke f,
 // even if f has a different value in each invocation. A new instance of
 // Once is required for each function to execute.
@@ -25,7 +27,6 @@ func New() *Once {
 //
 // If f panics, Do considers it to have returned; future calls of Do return
 // without calling f.
-//
 func (o *Once) Do(f func()) {
 
 }

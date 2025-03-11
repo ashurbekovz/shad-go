@@ -60,7 +60,7 @@ func NewWriter(out io.Writer) io.WriteCloser {
 
 //!-
 
-//!+write
+// !+write
 func (w *writer) Write(data []byte) (int, error) {
 	if w.stream == nil {
 		panic("closed")
@@ -83,7 +83,7 @@ func (w *writer) Write(data []byte) (int, error) {
 
 //!-write
 
-//!+close
+// !+close
 // Close flushes the compressed data and closes the stream.
 // It does not close the underlying io.Writer.
 func (w *writer) Close() error {

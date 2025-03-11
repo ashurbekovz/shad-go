@@ -25,10 +25,10 @@ func TestOnce(t *testing.T) {
 	once := New()
 	c := make(chan bool)
 	const N = 10
-	for i := 0; i < N; i++ {
+	for i := range N {
 		go run(t, once, o, c)
 	}
-	for i := 0; i < N; i++ {
+	for i := range N {
 		<-c
 	}
 	if *o != 1 {
@@ -57,7 +57,7 @@ func TestOncePanic(t *testing.T) {
 
 func TestOnceManyTimes(t *testing.T) {
 	const N = 1000
-	for i := 0; i < N; i++ {
+	for i := range N {
 		TestOnce(t)
 	}
 }
@@ -67,8 +67,7 @@ func TestOnceNoBusyWait(t *testing.T) {
 
 	done := make(chan struct{})
 	defer close(done)
-
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		go once.Do(func() {
 			<-done
 		})

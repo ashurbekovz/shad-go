@@ -41,8 +41,7 @@ func NewCache(root string) (*Cache, error) {
 	if err := os.MkdirAll(cacheDir, 0777); err != nil {
 		return nil, err
 	}
-
-	for i := 0; i < 256; i++ {
+	for i := range 256 {
 		d := hex.EncodeToString([]byte{uint8(i)})
 		if err := os.MkdirAll(filepath.Join(cacheDir, d), 0777); err != nil {
 			return nil, err

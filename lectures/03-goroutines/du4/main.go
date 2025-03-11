@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-//!+1
+// !+1
 var done = make(chan struct{})
 
 func cancelled() bool {
@@ -92,7 +92,7 @@ func printDiskUsage(nfiles, nbytes int64) {
 
 // walkDir recursively walks the file tree rooted at dir
 // and sends the size of each found file on fileSizes.
-//!+4
+// !+4
 func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
 	defer n.Done()
 	if cancelled() {
@@ -117,7 +117,7 @@ func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
 var sema = make(chan struct{}, 20) // concurrency-limiting counting semaphore
 
 // dirents returns the entries of directory dir.
-//!+5
+// !+5
 func dirents(dir string) []os.FileInfo {
 	select {
 	case sema <- struct{}{}: // acquire token

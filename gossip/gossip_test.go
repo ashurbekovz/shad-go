@@ -121,8 +121,7 @@ func TestGossip_ManyPeers(t *testing.T) {
 
 	var peers []*gossip.Peer
 	names := map[string]string{}
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		peer, _ := env.newPeer()
 		peer.AddSeed(seed.Addr())
 		peer.UpdateMeta(&meshpb.PeerMeta{Name: fmt.Sprint(i)})
@@ -160,8 +159,7 @@ func TestGossip_Groups(t *testing.T) {
 	aSize, bSize := 1, 1
 	seedA, _ := env.newPeer()
 	seedB, _ := env.newPeer()
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		peer, _ := env.newPeer()
 
 		if rand.Int()%2 == 0 {

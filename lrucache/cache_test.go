@@ -31,8 +31,7 @@ func TestCache_update(t *testing.T) {
 
 func TestCache_Get(t *testing.T) {
 	c := New(5)
-
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		c.Set(i, i)
 	}
 
@@ -54,8 +53,7 @@ func TestCache_Get(t *testing.T) {
 
 func TestCache_Clear(t *testing.T) {
 	c := New(5)
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		c.Set(i, i)
 	}
 
@@ -78,14 +76,12 @@ func TestCache_Clear(t *testing.T) {
 
 func TestCache_Clear_logic(t *testing.T) {
 	c := New(5)
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		c.Set(i, i)
 	}
 
 	c.Clear()
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		_, ok := c.Get(i)
 		require.False(t, ok)
 	}
@@ -109,8 +105,7 @@ func TestCache_Clear_logic(t *testing.T) {
 
 func TestCache_Range(t *testing.T) {
 	c := New(5)
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		c.Set(i, i)
 	}
 
@@ -157,7 +152,7 @@ func TestCache_eviction(t *testing.T) {
 			c := New(tc.cap)
 
 			keyToValue := make(map[int]int)
-			for i := 0; i < tc.numInserts; i++ {
+			for i := range tc.numInserts {
 				key := int(r.Int31n(tc.maxKey))
 				c.Set(key, i)
 				keyToValue[key] = i
@@ -214,7 +209,7 @@ func BenchmarkCache_Set(b *testing.B) {
 			c := New(tc.cap)
 			b.ResetTimer()
 			b.ReportAllocs()
-			for i := 0; i < b.N; i++ {
+			for i := range b.N {
 				c.Set(i%tc.cap, i)
 			}
 		})

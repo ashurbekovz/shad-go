@@ -19,7 +19,7 @@ func TestFunctions(t *testing.T) {
 	assert.Nil(t, err)     // want `use assert.NoError instead of comparing error to nil`
 	assert.NotNil(t, err)  // want `use assert.Error instead of comparing error to nil`
 
-	require.Nilf(t, err, "%s", "a") // want `use require.NoErrorf instead of comparing error to nil`
+	require.Nilf(t, err, "%s", "a")    // want `use require.NoErrorf instead of comparing error to nil`
 	require.NotNilf(t, err, "%s", "a") // want `use require.Errorf instead of comparing error to nil`
 	assert.Nilf(t, err, "%s", "a")     // want `use assert.NoErrorf instead of comparing error to nil`
 	assert.NotNilf(t, err, "%s", "a")  // want `use assert.Errorf instead of comparing error to nil`
@@ -53,7 +53,7 @@ func TestAssertions(t *testing.T) {
 	assert.Nil(err)     // want `use assert.NoError instead of comparing error to nil`
 	assert.NotNil(err)  // want `use assert.Error instead of comparing error to nil`
 
-	require.Nilf(err, "%s", "a") // want `use require.NoErrorf instead of comparing error to nil`
+	require.Nilf(err, "%s", "a")    // want `use require.NoErrorf instead of comparing error to nil`
 	require.NotNilf(err, "%s", "a") // want `use require.Errorf instead of comparing error to nil`
 	assert.Nilf(err, "%s", "a")     // want `use assert.NoErrorf instead of comparing error to nil`
 	assert.NotNilf(err, "%s", "a")  // want `use assert.Errorf instead of comparing error to nil`

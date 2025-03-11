@@ -87,10 +87,9 @@ func TestAcquireAfterDelay(t *testing.T) {
 	N := 5
 	limit := NewLimiter(N, time.Second)
 	defer limit.Stop()
-
-	for epoch := 0; epoch < e; epoch++ {
+	for epoch := range e {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-		for i := 0; i < N; i++ {
+		for i := range N {
 			require.NoError(t, limit.Acquire(ctx))
 		}
 		cancel()
@@ -108,8 +107,7 @@ func TestAcquireAfterStopped(t *testing.T) {
 
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
-
-	for i := 0; i < nTries; i++ {
+	for i := range nTries {
 		require.Contains(t, []error{ErrStopped, context.Canceled}, limit.Acquire(ctx))
 	}
 }
@@ -125,7 +123,7 @@ func TestTimeDistribution(t *testing.T) {
 	start := time.Now()
 
 	var wg sync.WaitGroup
-	for i := 0; i < 500; i++ {
+	for i := range 500 {
 		time.Sleep(time.Millisecond * 5)
 
 		wg.Add(1)
@@ -179,9 +177,9 @@ func TestStressBlocking(t *testing.T) {
 	defer limit.Stop()
 
 	var eg errgroup.Group
-	for i := 0; i < G; i++ {
+	for i := range G {
 		eg.Go(func() error {
-			for j := 0; j < N; j++ {
+			for j := range N {
 				if err := limit.Acquire(context.Background()); err != nil {
 					return err
 				}
@@ -206,9 +204,9 @@ func TestStressNoBlocking(t *testing.T) {
 	defer limit.Stop()
 
 	var eg errgroup.Group
-	for i := 0; i < G; i++ {
+	for i := range G {
 		eg.Go(func() error {
-			for j := 0; j < N; j++ {
+			for j := range N {
 				if err := limit.Acquire(context.Background()); err != nil {
 					return err
 				}

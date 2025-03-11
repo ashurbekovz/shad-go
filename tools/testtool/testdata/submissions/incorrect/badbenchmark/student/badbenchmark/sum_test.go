@@ -17,7 +17,7 @@ func BenchmarkSum(b *testing.B) {
 		{a: math.MaxInt64, b: 1, sum: math.MinInt64},
 	} {
 		b.Run(fmt.Sprint(i), func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
+			for i := range b.N {
 				_ = Sum(input.a, input.b)
 			}
 		})

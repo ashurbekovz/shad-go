@@ -4,7 +4,7 @@
 // See page 332.
 
 // Package format provides an Any function that can format any value.
-//!+
+// !+
 package format
 
 import (

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//nolint
+// nolint
 func main() {
 	x := "hello"
 	for _, x := range x {

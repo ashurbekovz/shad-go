@@ -82,13 +82,12 @@ func TestFileUpload(t *testing.T) {
 			N = 10
 			G = 10
 		)
-
-		for i := 0; i < N; i++ {
+		for i := range N {
 			var wg sync.WaitGroup
 			wg.Add(G)
 
 			id := build.ID{0x03, byte(i)}
-			for j := 0; j < G; j++ {
+			for j := range G {
 				go func() {
 					defer wg.Done()
 

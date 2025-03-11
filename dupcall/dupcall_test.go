@@ -44,7 +44,7 @@ func TestCall_NoBusyWait(t *testing.T) {
 	defer close(done)
 
 	var call Call
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		go func() {
 			_, _ = call.Do(context.Background(), func(ctx context.Context) (interface{}, error) {
 				<-done
@@ -68,7 +68,7 @@ func TestCall_Dedup(t *testing.T) {
 	}
 
 	var call Call
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		go func() {
 			_, _ = call.Do(context.Background(), cb)
 		}()
@@ -93,13 +93,12 @@ func TestCall_HalfCancel(t *testing.T) {
 	}
 
 	var call Call
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		go func() {
 			_, _ = call.Do(context.Background(), cb)
 		}()
 	}
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		ctx, cancel := context.WithCancel(context.Background())
 
 		go func() {
@@ -132,8 +131,7 @@ func TestCall_FullCancel(t *testing.T) {
 	}
 
 	var call Call
-
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		ctx, cancel := context.WithCancel(context.Background())
 
 		go func() {

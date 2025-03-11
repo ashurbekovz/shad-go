@@ -17,7 +17,7 @@ func Unpack(req *http.Request, ptr interface{}) error {
 
 	fields := make(map[string]reflect.Value)
 	v := reflect.ValueOf(ptr).Elem()
-	for i := 0; i < v.NumField(); i++ {
+	for i := range v.NumField() {
 		fieldInfo := v.Type().Field(i)
 		tag := fieldInfo.Tag
 		name := tag.Get("http")

@@ -6,8 +6,9 @@ func main() {
 	naturals := make(chan int)
 	squares := make(chan int)
 
-	go func() { // Counter
-		for x := 0; x < 100; x++ {
+	go func() {
+		for // Counter
+		x := range 100 {
 			naturals <- x
 		}
 		close(naturals)
